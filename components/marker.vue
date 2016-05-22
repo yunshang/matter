@@ -2,7 +2,7 @@
     <div class="center-block col-sm-12 text-center">
         <header class="header">
             <h1>matter</h1>
-            <input class="new-matter felx-1" autofocus="" autocomplete="off" placeholder="What needs to be done?" v-model="new_matter" @keyup.enter="addmatter">
+            <input class="new-matter felx-1" autofocus="" autocomplete="off" placeholder="What can i do for you ?" v-model="new_matter" @keyup.enter="addmatter">
         </header>
         <div class="row" style="margin-top:20px">
             <div class="col-xs-6 col-sm-6" v-for="matter in matters">
