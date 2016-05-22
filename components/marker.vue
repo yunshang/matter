@@ -18,19 +18,14 @@
 </template>
 
 <script>
-  import Cache from "./cache";
+  import {storage} from "./cache";
+  var ms = new storage();
   export default {
     data() {
       return {
-        matters: matterStorage.fetch(),
+        matters: ms.fetchall(),
         new_matter: '',
         edit_matter: null
-      }
-    },
-    watch: {
-      matters: {
-        deep: true,
-        handler: matterStorage.save
       }
     },
     methods: {
@@ -39,7 +34,9 @@
         if (!value) {
           return;
         }
-        this.matters.push({ title: value, answer: '' });
+        var new_matter = ms.set_title(value);
+        console.dir(new_matter);
+        this.matters.push({ title: new_matter.get('title'), answer: new_matter.get('answer'), id: new_matter.id })
         this.new_matter = '';
       },
       editmatter: function (matter) {
@@ -52,6 +49,7 @@
         }
         this.edit_matter = null;
         matter.answer = matter.answer.trim();
+        ms.update_answer(matter);
         if (!matter.answer) {
           this.removeTodo(matter.answer);
         }
